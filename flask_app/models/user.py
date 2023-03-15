@@ -1,6 +1,5 @@
-# import the function that will return an instance of a connection
-from mysqlconnection import connectToMySQL
-# model the class after the friend table from our database
+from flask_app.config.mysqlconnection import connectToMySQL
+
 class User:
     DB = 'users_schema'
     def __init__( self , data ):
@@ -10,7 +9,6 @@ class User:
         self.email = data['email']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-# Now we use class methods to query our database
 
     # CREATE
     @classmethod
