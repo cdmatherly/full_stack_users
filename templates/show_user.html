@@ -16,9 +16,10 @@
 <body>
   <header>
     <div class="container mt-5 d-flex justify-content-between align-items-center">
-      <h1>All Users</h1>
+      <h1>User {{user.id}}</h1>
       <div class="d-flex gap-3">
           <a href="/">Home</a>
+          <a href="/users/show_all">Show All</a>
       </div>
   </div>
   </header>
@@ -27,33 +28,29 @@
       <div class="table-responsive">
         <table class="table table-light table-striped table-hover table-bordered">
           <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Created At</th>
-              <th scope="col" class="col-2">Actions</th>
-            </tr>
           </thead>
-          <tbody>{% for user in all_users%}
+          <tbody>
             <tr>
-              <td>{{user.id}}</td>
+              <th scope="row">Full Name</th>
               <td>{{user.first_name}} {{user.last_name}}</td>
-              <td>{{user.email}}</td>
-              <td>{{user.created_at}}</td>
-              <td class="d-flex gap-3">
-                <a href="/users/show/{{user.id}}">Show</a>
-                <p>|</p>
-                <a href="/users/update/{{user.id}}">Edit</a>
-                <p>|</p>
-                <a href="/users/delete/{{user.id}}">Delete</a>
-              </td>
             </tr>
-            {% endfor %}
+            <tr>
+              <th scope="row">Email</th>
+              <td>{{user.email}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Created On</th>
+              <td>{{user.created_at}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Last Updated On</th>
+              <td>{{user.updated_at}}</td>
+            </tr>
           </tbody>
         </table>
+        <a name="" id="" class="btn btn-dark" href="/users/update/{{user.id}}" role="button">Edit</a>
+        <a name="" id="" class="btn btn-dark" href="/users/delete/{{user.id}}" role="button">Delete</a>
       </div>
-      <a name="" id="" class="btn btn-dark" href="/users/create" role="button">Add a new user</a>
     </div>
   </main>
   <footer>

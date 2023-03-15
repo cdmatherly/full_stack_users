@@ -18,13 +18,29 @@ def create():
 
 @app.route('/users/create/process', methods=['POST'])
 def process_create():
-    User.save(request.form)
-    return redirect('/users/show_all')
+    user_id = User.save(request.form)
+    return redirect(f'/user/show/{user_id}')
 
-@app.route('/user/show/<int:user_id>')
+@app.route('/users/show/<int:user_id>')
 def show(user_id):
     user = User.get_one(user_id)
+    print(user.first_name)
     return render_template('show_user.html', user=user)
+
+@app.route('/users/update/<int:user_id>')
+def update(user_id):
+    user = User.get_one(user_id)
+    return render_template('update.html', user=user)
+
+@app.route('/users/update/process/<int:user_id>', methods=['POST'])
+def process_update(user_id):
+    User.update_user(request.form, id=user_id)
+    return redirect('/users/show_all')
+
+@app.route('/users/delete/<int:user_id>')
+def delete(user_id):
+    User.delete_user(user_id)
+    return redirect('/users/show_all')
 
 if __name__ == "__main__":
     app.run(debug=True)
